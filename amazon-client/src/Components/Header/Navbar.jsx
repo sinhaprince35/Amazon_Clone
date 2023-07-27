@@ -7,7 +7,7 @@ const Navbar = () => {
           <nav>
               <div className='left'>
                   <div className="navLogo">
-                      
+                      <img src='https://www.freepnglogos.com/uploads/amazon-png-logo-vector/amazon-symbol-png-logo-vector-9.png' alt='amazonLogo'/>
                    </div>
               </div>
               <div className='right'>

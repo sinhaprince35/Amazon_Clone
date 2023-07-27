@@ -18,8 +18,8 @@ header nav{
     z-index: 4;
 }
 
-header nav .navlogo img{
-    width: 110px;
+header nav .navLogo img{
+    width: 220px;
     margin-top: 10px;
 }
 
