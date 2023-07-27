@@ -16,7 +16,9 @@ const Newnav = () => {
                   <p>Today's Deal</p>
                   <p>Amazon Pay</p>
         </div>
-        <div className="right_data"></div>
+              <div className="right_data">
+                  <img src="./newNavimage.jpg"/>
+        </div>
       </div>
     </div>
   );
