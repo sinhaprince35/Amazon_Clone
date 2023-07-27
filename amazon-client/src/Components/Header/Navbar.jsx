@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="left">
           <div className="navLogo">
             <img
-              src="https://cdn.cdnlogo.com/logos/a/83/amazon-com.svg"
+              src="./AmazonTL.png"
               alt="amazonLogo"
             />
           </div>
