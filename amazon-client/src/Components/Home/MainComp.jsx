@@ -1,5 +1,5 @@
 import React from "react";
-import "maincomp.css";
+import "./maincomp.css";
 import Banner from "./Banner";
 
 const MainComp = () => {
