@@ -3,7 +3,7 @@ import "./navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Avatar from '@mui/material/Avatar';
+import Avatar from "@mui/material/Avatar";
 
 const Navbar = () => {
   return (
@@ -30,10 +30,10 @@ const Navbar = () => {
           <div className="cart_btn">
             <Badge badgeContent={4} color="primary">
               <ShoppingCartIcon id="icon" />
-                      </Badge>
-                      <p>Cart</p>
-                  </div>
-                  <Avatar className="avtar"/>
+            </Badge>
+            <p>Cart</p>
+          </div>
+          <Avatar className="avtar" />
         </div>
       </nav>
     </header>
