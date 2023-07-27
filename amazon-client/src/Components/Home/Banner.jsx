@@ -1,11 +1,16 @@
 import React from 'react'
 import './banner.css'
+import Carousel from 'react-material-ui-carousel'
 
+
+const data = [
+  ""
+]
 const Banner = () => {
   return (
-    <div>
-      banner
-    </div>
+    <Carousel>
+      
+   </Carousel>
   )
 }
 
