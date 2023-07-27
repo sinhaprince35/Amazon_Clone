@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="left">
           <div className="navLogo">
             <img
-              src="https://www.freepnglogos.com/uploads/amazon-png-logo-vector/amazon-symbol-png-logo-vector-9.png"
+              src="https://cdn.cdnlogo.com/logos/a/83/amazon-com.svg"
               alt="amazonLogo"
             />
           </div>
