@@ -29,7 +29,7 @@ const Navbar = () => {
             <NavLink to="/login">Sign in</NavLink>
           </div>
           <div className="cart_btn">
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={0} color="primary">
               <ShoppingCartIcon id="icon" />
             </Badge>
             <p>Cart</p>
