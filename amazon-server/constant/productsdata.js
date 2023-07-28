@@ -132,7 +132,7 @@ const products = [
     description:
       "Vu Televisions (also Vu Technologies) is a television brand and an LED TV and display manufacturer founded by Indian businessperson Devita Saraf, in United States in 2006. It is amongst top 10 largest-selling TV brand across e-commerce platforms in India.",
     discount: "1200",
-    tagline: "A truly larger than life experience",
+    tagline: "Okay Google, Let's Vu",
   },
 ];
 
