@@ -1,4 +1,5 @@
 import "./App.css";
+import Cart from "./Components/Cart/Cart";
 import Footer from "./Components/Footer/Footer";
 import Navbar from "./Components/Header/Navbar";
 import MainComp from "./Components/Home/MainComp";
@@ -15,7 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<MainComp />} />
         <Route path="/login" element={<Sign_in />} />
-        <Route path="/register" element={<Sign_up/> } />
+        <Route path="/register" element={<Sign_up />} />
+        <Route path="/getproductsone/:id" element={<Cart/> } />
       </Routes>
       <Footer />
     </>
