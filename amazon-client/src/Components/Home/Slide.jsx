@@ -24,11 +24,11 @@ const responsive = {
     items: 1,
   },
 };
-const Slide = () => {
+const Slide = ({ title }) => {
   return (
     <div className="products_section">
       <div className="products_deal">
-        <h3>Deal of The Day</h3>
+        <h3>{title}</h3>
         <button className="view_btn">View All</button>
       </div>
       <Divider />
@@ -37,7 +37,7 @@ const Slide = () => {
         infinite={true}
         draggable={false}
         swipeable={true}
-        showDots={true}
+        showDots={false}
         centerMode={true}
         autoPlay={true}
         autoPlaySpeed={4000}
