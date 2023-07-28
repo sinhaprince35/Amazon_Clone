@@ -15,13 +15,13 @@ const MainComp = () => {
         </div>
         <div className="right_slide">
           <h4>Great Freedom Sale</h4>
-          <img src="./great.jpg" alt="side image" />
+          <img src="./great.jpg" alt="sideImage" />
           <a href="#">See More</a>
         </div>
       </div>
       <Slide title="Today's Deal" />
       <div className="center_img">
-        <img src="./sixer.jpg" alt="center image"/>
+        <img src="./sixer.jpg" alt="centerImage"/>
       </div>
       <Slide title="Upto 80% off" />
       <Slide title="Best Seller" />
