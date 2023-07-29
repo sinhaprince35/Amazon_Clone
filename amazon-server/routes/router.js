@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const Products = require("../models/productsSchema");
 const USER = require("../models/userSchema");
+const bcrypt = require("bcryptjs");
 
 //get productsdata api
 router.get("/getproducts", async (req, res) => {
@@ -39,7 +40,7 @@ router.post("/register", async (req, res) => {
   const { fname, email, mobile, password, cpassword } = req.body;
   if (!fname || !email || !mobile || !password || !cpassword) {
     res.status(422).json({ error: "Fill all the data" });
-  };
+  }
   try {
     const preuser = await USER.findOne({ email: email });
     if (preuser) {
@@ -62,6 +63,39 @@ router.post("/register", async (req, res) => {
       res.status(201).json(storedata);
     }
   } catch (error) {}
+});
+
+// Login user api
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    res.status(400).json({ error: "Fill all the data" });
+  }
+  try {
+    const userlogin = await USER.findOne({ email: email });
+    // console.log(userlogin + "user value")
+
+    if (userlogin) {
+      const isMatch = await bcrypt.compare(password, userlogin.password);
+      // console.log(isMatch);
+
+      //Token generate
+      const token = await userlogin.generateAuthtokenn();
+      console.log(token);
+
+      if (!isMatch) {
+        res.status(400).json({ error: "Invalid details" });
+      } else {
+        res.status(201).json(userlogin);
+      }
+    } else {
+      res.status(400).json({ error: "User not registered" });
+    }
+  } catch (error) {
+    res.status(400).json({ error: "Invalid crediential pass" });
+  }
 });
 
 module.exports = router;
