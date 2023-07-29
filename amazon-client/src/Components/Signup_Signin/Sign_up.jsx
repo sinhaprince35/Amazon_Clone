@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Sign_up = () => {
   const [udata, setUdata] = useState({
@@ -24,23 +26,55 @@ const Sign_up = () => {
   const senddata = async (e) => {
     e.preventDefault();
     const { fname, email, mobile, password, cpassword } = udata;
+    // if (fname === "") {
+    //   toast.warn("Enter your name", {
+    //     position: "top-center",
+    //   });
+    // } else if (email === "") {
+    //   toast.warn("Enter e-mail id", {
+    //     position: "top-center",
+    //   });
+    // } else if (mobile === "") {
+    //   toast.warn("Enter your mobile number", {
+    //     position: "top-center",
+    //   });
+    // } else {
+      
+    // }
     const res = await fetch("/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        fname, email, mobile, password, cpassword
-      })
+        fname,
+        email,
+        mobile,
+        password,
+        cpassword,
+      }),
     });
     const data = await res.json();
     // console.log(data);
 
     if (res.status === 422 || !data) {
-      alert("No Data")
+      // alert("No Data");
+      toast.warn("Invalid details", {
+        position: "top-center",
+      });
     } else {
-      alert("Email registered successfully")
-      setUdata({ ...udata, fname: "", email: "", mobile: "", password: "", cpassword: "" });
+      // alert("Email registered successfully");
+      toast.success("Email registered successfully", {
+        position: "top-center",
+      });
+      setUdata({
+        ...udata,
+        fname: "",
+        email: "",
+        mobile: "",
+        password: "",
+        cpassword: "",
+      });
     }
   };
 
@@ -116,6 +150,7 @@ const Sign_up = () => {
               </div>
             </form>
           </div>
+          <ToastContainer />
         </div>
       </section>
     </>

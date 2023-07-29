@@ -38,8 +38,8 @@ router.post("/register", async (req, res) => {
 
   const { fname, email, mobile, password, cpassword } = req.body;
   if (!fname || !email || !mobile || !password || !cpassword) {
-    req.status(422).json({ error: "Fill all the data" });
-  }
+    res.status(422).json({ error: "Fill all the data" });
+  };
   try {
     const preuser = await USER.findOne({ email: email });
     if (preuser) {
