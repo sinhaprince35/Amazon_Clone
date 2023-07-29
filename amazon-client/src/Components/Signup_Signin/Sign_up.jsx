@@ -21,6 +21,29 @@ const Sign_up = () => {
     });
   };
 
+  const senddata = async (e) => {
+    e.preventDefault();
+    const { fname, email, mobile, password, cpassword } = udata;
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fname, email, mobile, password, cpassword
+      })
+    });
+    const data = await res.json();
+    // console.log(data);
+
+    if (res.status === 422 || !data) {
+      alert("No Data")
+    } else {
+      alert("Email registered successfully")
+      setUdata({ ...udata, fname: "", email: "", mobile: "", password: "", cpassword: "" });
+    }
+  };
+
   return (
     <>
       <section>
@@ -29,7 +52,7 @@ const Sign_up = () => {
             <img src="./blacklogo.png" alt="amazonlogo" />
           </div>
           <div className="sign_form">
-            <form>
+            <form method="POST">
               <h1>Create account</h1>
               <div className="form_data">
                 <label htmlFor="fname">Your name</label>
@@ -84,7 +107,9 @@ const Sign_up = () => {
                   id="password"
                 />
               </div>
-              <button className="signin_btn">Continue</button>
+              <button className="signin_btn" onClick={senddata}>
+                Continue
+              </button>
               <div className="signin_info">
                 <p>Already have an account?</p>
                 <NavLink to="/login">Sign in</NavLink>
