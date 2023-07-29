@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./cart.css";
 import { Divider } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { LoginContext } from "../Context/ContextProvider";
 
 const Cart = () => {
   const { id } = useParams("");
   // console.log(id);
+  const history = useNavigate("");
 
   const { account, setAccount } = useContext(LoginContext);
 
@@ -40,12 +41,12 @@ const Cart = () => {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        inddata
+        inddata,
       }),
-      credentials: "include"
+      credentials: "include",
     });
     const data1 = await checkres.json();
     console.log(data1);
@@ -54,10 +55,11 @@ const Cart = () => {
       console.log("User Invalid");
       alert("User Invalid");
     } else {
-      alert("Data added in your cart")
-      setAccount(data1)
+      // alert("Data added in your cart")
+      history("/buynow");
+      setAccount(data1);
     }
-  }
+  };
 
   return (
     <div className="cart_section">
@@ -66,7 +68,12 @@ const Cart = () => {
           <div className="left_cart">
             <img src={inddata.url} alt="cart_img" />
             <div className="cart_btn">
-              <button className="cart_btn1" onClick={()=>addtocart(inddata.id)}>Add to Cart</button>
+              <button
+                className="cart_btn1"
+                onClick={() => addtocart(inddata.id)}
+              >
+                Add to Cart
+              </button>
               <button className="cart_btn2">Buy Now</button>
             </div>
           </div>
