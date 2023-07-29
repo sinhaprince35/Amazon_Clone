@@ -111,7 +111,7 @@ const products = [
     },
     description:
       "Get blazing Fast and Smooth performance with a bunch of RAM and our RAM-Vita algorithm. A big, beautiful display with gorgeous colors and a lightning-fast refresh rate.",
-    discount: "1699.95",
+    discount: "Discount : ₹1699.95",
     tagline: "A truly larger than life experience",
   },
   {
@@ -131,7 +131,7 @@ const products = [
     },
     description:
       "Vu Televisions (also Vu Technologies) is a television brand and an LED TV and display manufacturer founded by Indian businessperson Devita Saraf, in United States in 2006. It is amongst top 10 largest-selling TV brand across e-commerce platforms in India.",
-    discount: "1200",
+    discount: "Discount : ₹1200",
     tagline: "Okay Google, Let's Vu",
   },
 ];
