@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Avatar from "@mui/material/Avatar";
 import { NavLink } from "react-router-dom";
+import { LoginContext } from "../Context/ContextProvider";
 
 const Navbar = () => {
+  const { account, setAccount } = useContext(LoginContext);
+  console.log(account);
   return (
     <header>
       <nav>
@@ -29,7 +32,7 @@ const Navbar = () => {
             <NavLink to="/login">Sign in</NavLink>
           </div>
           <div className="cart_btn">
-            <Badge badgeContent={0} color="primary">
+            <Badge badgeContent={account?.carts?.length || 0} color="primary">
               <ShoppingCartIcon id="icon" />
             </Badge>
             <p>Cart</p>
