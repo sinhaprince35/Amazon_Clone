@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { React, useContext, useEffect } from "react";
 import "./navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
@@ -10,6 +10,28 @@ import { LoginContext } from "../Context/ContextProvider";
 const Navbar = () => {
   const { account, setAccount } = useContext(LoginContext);
   console.log(account);
+
+  const getdetailvaliduser = async () => {
+    const res = await fetch("/validuser", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log(data);
+    if (res.status !== 201) {
+      console.log("Error");
+    } else {
+      console.log("Data Valid");
+      setAccount(data);
+    }
+  };
+  useEffect(() => {
+    getdetailvaliduser();
+  }, []);
   return (
     <header>
       <nav>
@@ -32,12 +54,30 @@ const Navbar = () => {
             <NavLink to="/login">Sign in</NavLink>
           </div>
           <div className="cart_btn">
-            <Badge badgeContent={account?.carts?.length || 0} color="primary">
-              <ShoppingCartIcon id="icon" />
-            </Badge>
+            {account ? (
+              <NavLink to="/buynow">
+                <Badge
+                  badgeContent={account?.carts?.length || 0}
+                  color="primary"
+                >
+                  <ShoppingCartIcon id="icon" />
+                </Badge>
+              </NavLink>
+            ) : (
+              <NavLink to="/login">
+                <Badge badgeContent={0} color="primary">
+                  <ShoppingCartIcon id="icon" />
+                </Badge>
+              </NavLink>
+            )}
+
             <p>Cart</p>
           </div>
-          <Avatar className="avtar" />
+          {account ? (
+            <Avatar className="avtar2">{account.fname[0].toUpperCase()}</Avatar>
+          ) : (
+            <Avatar className="avtar"></Avatar>
+          )}
         </div>
       </nav>
     </header>

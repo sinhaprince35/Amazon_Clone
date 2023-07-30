@@ -127,4 +127,25 @@ router.post("/addcart/:id", authenticate, async (req, res) => {
   }
 });
 
+//Get cart details
+router.get("/cartdetails", authenticate, async (req, res) => {
+  try {
+    const buyuser = await USER.findOne({ _id: req.userID });
+    res.status(201).json(buyuser);
+  } catch (error) {
+    console.log("error" + error);
+  }
+});
+
+// Get valid user
+router.get("/validuser", authenticate, async (req, res) => {
+  try {
+    const validuserone = await USER.findOne({ _id: req.userID });
+    res.status(201).json(validuserone);
+  } catch (error) {
+    console.log("error" + error);
+  }
+});
+
+
 module.exports = router;

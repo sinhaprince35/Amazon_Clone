@@ -36,7 +36,7 @@ const Sign_in = () => {
     });
     const data = await res.json();
     console.log(data);
-    if (res.status == 400 || !data) {
+    if (res.status === 400 || !data) {
       console.log("Invalid details");
       toast.warn("Invalid details", {
         position: "top-center",
