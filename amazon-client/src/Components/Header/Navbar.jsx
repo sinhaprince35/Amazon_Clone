@@ -12,9 +12,12 @@ import Drawer from "@mui/material/Drawer";
 import Rightheader from "./Rightheader";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { account, setAccount } = useContext(LoginContext);
@@ -29,6 +32,12 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [text, setText] = useState("");
+  console.log(text);
+  const [listopen, setListopen] = useState(true);
+
+  const { products } = useSelector((state) => state.getproductsdata);
 
   const [dropen, setDropen] = useState(false);
   console.log(account);
@@ -84,6 +93,11 @@ const Navbar = () => {
     }
   };
 
+  const getText = (iteams) => {
+    setText(iteams);
+    setListopen(false);
+  };
+
   useEffect(() => {
     getdetailvaliduser();
   }, []);
@@ -104,10 +118,38 @@ const Navbar = () => {
             </NavLink>
           </div>
           <div className="nav_searchbar">
-            <input type="text" name="" id="" placeholder="Amazon search" />
+            <input
+              type="text"
+              name=""
+              onChange={(e) => getText(e.target.value)}
+              id=""
+              placeholder="Amazon search"
+            />
             <div className="search_icon">
               <SearchIcon id="search" />
             </div>
+
+            {/* Search filter */}
+            {text && (
+              <List className="extrasearch" hidden={listopen}>
+                {products
+                  .filter((product) =>
+                    product.title.longTitle
+                      .toLowerCase()
+                      .includes(text.toLowerCase())
+                  )
+                  .map((product) => (
+                    <ListItem>
+                      <NavLink
+                        to={`/getproductsone/${product.id}`}
+                        onClick={() => setListopen(true)}
+                      >
+                        {product.title.longTitle}
+                      </NavLink>
+                    </ListItem>
+                  ))}
+              </List>
+            )}
           </div>
         </div>
         <div className="right">
