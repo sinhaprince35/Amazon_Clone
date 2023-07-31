@@ -82,18 +82,18 @@ router.post("/login", async (req, res) => {
       const isMatch = await bcrypt.compare(password, userlogin.password);
       // console.log(isMatch);
 
-      //Token generate
-      const token = await userlogin.generateAuthtokenn();
-      // console.log(token);
-
-      res.cookie("Amazonweb", token, {
-        expires: new Date(Date.now() + 900000),
-        httpOnly: true,
-      });
-
       if (!isMatch) {
         res.status(400).json({ error: "Invalid details" });
       } else {
+        //Token generate
+        const token = await userlogin.generateAuthtokenn();
+        // console.log(token);
+
+        res.cookie("Amazonweb", token, {
+          expires: new Date(Date.now() + 900000),
+          httpOnly: true,
+        });
+
         res.status(201).json(userlogin);
       }
     } else {
@@ -163,12 +163,11 @@ router.delete("/remove/:id", authenticate, async (req, res) => {
   }
 });
 
-
 // For user Logout
 router.get("/lougout", authenticate, (req, res) => {
   try {
     req.rootUser.tokens = req.rootUser.tokens.filter((curelem) => {
-      return curelem.token !== req.token
+      return curelem.token !== req.token;
     });
 
     res.clearCookie("Amazonweb", { path: "/" });
@@ -178,7 +177,6 @@ router.get("/lougout", authenticate, (req, res) => {
   } catch (error) {
     console.log("Error for user logout");
   }
-})
-
+});
 
 module.exports = router;
