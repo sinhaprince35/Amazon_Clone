@@ -4,7 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Avatar from "@mui/material/Avatar";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LoginContext } from "../Context/ContextProvider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,9 +13,13 @@ import Rightheader from "./Rightheader";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
   const { account, setAccount } = useContext(LoginContext);
+
+  const history = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -54,6 +58,30 @@ const Navbar = () => {
 
   const handledrclose = () => {
     setDropen(false);
+  };
+
+  const logoutuser = async () => {
+    const res2 = await fetch("/lougout", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    const data2 = await res2.json();
+    console.log(data2);
+    if (res2.status !== 201) {
+      console.log("Error");
+    } else {
+      console.log("Data Valid");
+      // alert("User Logout");
+      toast.success("User log out successfully", {
+        position: "top-center",
+      });
+      history("/");
+      setAccount(false);
+    }
   };
 
   useEffect(() => {
@@ -103,7 +131,7 @@ const Navbar = () => {
                 </Badge>
               </NavLink>
             )}
-
+            <ToastContainer />
             <p>Cart</p>
           </div>
           {account ? (
@@ -139,8 +167,8 @@ const Navbar = () => {
           >
             <MenuItem onClick={handleClose}>My account</MenuItem>
             {account ? (
-              <MenuItem onClick={handleClose}>
-                <LogoutIcon  style={{fontSize:16,marginRight:3}}/>
+              <MenuItem onClick={handleClose} onClick={logoutuser}>
+                <LogoutIcon style={{ fontSize: 16, marginRight: 3 }} />
                 Logout
               </MenuItem>
             ) : (
