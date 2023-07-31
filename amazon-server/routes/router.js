@@ -147,5 +147,20 @@ router.get("/validuser", authenticate, async (req, res) => {
   }
 });
 
+// Remove items from cart
+router.delete("/remove/:id", authenticate, async (req, res) => {
+  try {
+    const { id } = req.params;
+    req.rootUser.carts = req.rootUser.carts.filter((cruval) => {
+      return cruval.id != id;
+    });
+    req.rootUser.save();
+    res.status(201).json(req.rootUser);
+    console.log("Item removed");
+  } catch (error) {
+    console.log("Error" + error);
+    res.status(400).json(req.rootUser);
+  }
+});
 
 module.exports = router;
