@@ -10,9 +10,21 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "@mui/material/Drawer";
 import Rightheader from "./Rightheader";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
   const { account, setAccount } = useContext(LoginContext);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const [dropen, setDropen] = useState(false);
   console.log(account);
@@ -95,10 +107,46 @@ const Navbar = () => {
             <p>Cart</p>
           </div>
           {account ? (
-            <Avatar className="avtar2">{account.fname[0].toUpperCase()}</Avatar>
+            <Avatar
+              className="avtar2"
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              {account.fname[0].toUpperCase()}
+            </Avatar>
           ) : (
-            <Avatar className="avtar"></Avatar>
+            <Avatar
+              className="avtar"
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            ></Avatar>
           )}
+
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            {account ? (
+              <MenuItem onClick={handleClose}>
+                <LogoutIcon  style={{fontSize:16,marginRight:3}}/>
+                Logout
+              </MenuItem>
+            ) : (
+              ""
+            )}
+          </Menu>
         </div>
       </nav>
     </header>
