@@ -4,8 +4,9 @@ import "./rightheader.css";
 import { LoginContext } from "../Context/ContextProvider";
 import { NavLink } from "react-router-dom";
 import { Divider } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 
-const Rightheader = ({ logclose }) => {
+const Rightheader = ({ logclose, Logoutuser }) => {
   const { account, setAccount } = useContext(LoginContext);
 
   return (
@@ -32,8 +33,25 @@ const Rightheader = ({ logclose }) => {
           <Divider style={{ width: "100%", marginLeft: "-20px" }} />
           <div className="flag">
             <NavLink to="/">Settings</NavLink>
-            <img src="" alt="" />
+            <img
+              src="./india.png"
+              style={{ width: 35, marginLeft: 10 }}
+              alt=""
+            />
           </div>
+          {account ? (
+            <div className="flag">
+              <LogoutIcon style={{ fontSize: 18, marginRight: 4 }} />
+              <h3
+                onClick={() => Logoutuser()}
+                style={{ cursor: "pointer", fontWeight: 500 }}
+              >
+                Log out
+              </h3>
+            </div>
+          ) : (
+            <NavLink to="login">Sign in</NavLink>
+          )}
         </div>
       </div>
     </>
